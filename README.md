@@ -13,3 +13,7 @@ The idea behind GANs is that you have two networks, a generator __G__ and a disc
 What ends up happening is that the generator learns to make data that is indistinguishable from real data to the discriminator.
 
 <img src='assets/gan_pipeline.png' width=70% />
+
+The general structure of a GAN is shown in the diagram above, using MNIST images as data. The latent sample is a random vector that the generator uses to construct its fake images. This is often called a **latent vector** and that vector space is called **latent space**. As the generator trains, it figures out how to map latent vectors to recognizable images that can fool the discriminator.
+
+If you're interested in generating only new images, you can throw out the discriminator after training.
