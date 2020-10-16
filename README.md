@@ -11,3 +11,5 @@ The idea behind GANs is that you have two networks, a generator __G__ and a disc
   * The discriminator is a classifier that is trained to figure out which data is real and which is fake. 
 
 What ends up happening is that the generator learns to make data that is indistinguishable from real data to the discriminator.
+
+<img src='assets/gan_pipeline.png' width=70% />
