@@ -39,3 +39,15 @@ We'll also take the approach of using a more numerically stable loss function on
 > We will ultimately use [BCEWithLogitsLoss](https://pytorch.org/docs/stable/nn.html#bcewithlogitsloss), which combines a `sigmoid` activation function **and** and binary cross entropy loss in one function. 
 
 So, our final output layer should not have any activation function applied to it.
+
+### Generator
+
+The generator network will be almost exactly the same as the discriminator network, except that we're applying a [tanh activation function](https://pytorch.org/docs/stable/nn.html#tanh) to our output layer.
+
+#### tanh Output
+The generator has been found to perform the best with $tanh$ for the generator output, which scales the output to be between -1 and 1, instead of 0 and 1. 
+
+<img src='assets/tanh_fn.png' width=40% />
+
+Recall that we also want these outputs to be comparable to the *real* input pixel values, which are read in as normalized values between 0 and 1. 
+> So, we'll also have to **scale our real input images to have pixel values between -1 and 1** when we train the discriminator. 
