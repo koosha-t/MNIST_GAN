@@ -17,3 +17,25 @@ What ends up happening is that the generator learns to make data that is indisti
 The general structure of a GAN is shown in the diagram above, using MNIST images as data. The latent sample is a random vector that the generator uses to construct its fake images. This is often called a **latent vector** and that vector space is called **latent space**. As the generator trains, it figures out how to map latent vectors to recognizable images that can fool the discriminator.
 
 If you're interested in generating only new images, you can throw out the discriminator after training.
+
+## GAN Model Architecture to Generate Simple Handwritten Digits
+
+### Discriminator
+
+The discriminator network is going to be a pretty typical linear classifier. To make this network a universal function approximator, we'll need at least one hidden layer, and these hidden layers should have one key attribute:
+> All hidden layers will have a [Leaky ReLu](https://pytorch.org/docs/stable/nn.html#torch.nn.LeakyReLU) activation function applied to their outputs.
+
+<img src='assets/gan_network.png' width=70% />
+
+#### Leaky ReLu
+
+We should use a leaky ReLU to allow gradients to flow backwards through the layer unimpeded. A leaky ReLU is like a normal ReLU, except that there is a small non-zero output for negative input values.
+
+<img src='assets/leaky_relu.png' width=40% />
+
+#### Sigmoid Output
+
+We'll also take the approach of using a more numerically stable loss function on the outputs. Recall that we want the discriminator to output a value 0-1 indicating whether an image is _real or fake_. 
+> We will ultimately use [BCEWithLogitsLoss](https://pytorch.org/docs/stable/nn.html#bcewithlogitsloss), which combines a `sigmoid` activation function **and** and binary cross entropy loss in one function. 
+
+So, our final output layer should not have any activation function applied to it.
